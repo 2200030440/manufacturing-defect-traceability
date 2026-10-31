@@ -1,0 +1,6 @@
+anomaly_id,anomaly_type,expected_detection,entity,description
+EXC-ANOMALY-001,NONEXISTENT_LOT,True,Defect,Defect references a nonexistent material lot ID
+EXC-ANOMALY-002,CAPA_CLOSED_BEFORE_VERIFICATION,True,CorrectiveAction,CAPA closed with PENDING verification status
+EXC-ANOMALY-003,DEFECT_COUNT_EXCEEDS_INSPECTED,True,Defect,Defect quantity exceeds inspection failed quantity
+EXC-ANOMALY-004,BOM_MATERIAL_NOT_CONSUMED,True,ProductionOrder,Completed production order with no material consumption records
+EXC-ANOMALY-005,BROKEN_TRACEABILITY_CHAIN,True,Defect,Defect with all traceability links removed

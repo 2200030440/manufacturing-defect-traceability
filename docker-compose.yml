@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trace-q-app
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - DEBUG=false
+      - DATABASE_URL=sqlite:///./manufacturing.db
+      - SECRET_KEY=production-secret-key-change-me
+      - BACKEND_CORS_ORIGINS=["*"]
+    volumes:
+      - app_data:/app/backend/data
+    restart: unless-stopped
+
+volumes:
+  app_data:

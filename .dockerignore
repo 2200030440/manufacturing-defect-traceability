@@ -1,0 +1,14 @@
+node_modules
+**/node_modules
+frontend/dist
+dist
+__pycache__
+**/*.pyc
+.git
+.github
+.vscode
+.idea
+*.db
+*.sqlite3
+backend/manufacturing.db
+.pytest_cache

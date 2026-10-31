@@ -1,0 +1,40 @@
+{
+  "seed": 20261022,
+  "anomalies": [
+    {
+      "anomaly_id": "EXC-ANOMALY-001",
+      "anomaly_type": "NONEXISTENT_LOT",
+      "expected_detection": true,
+      "entity": "Defect",
+      "description": "Defect references a nonexistent material lot ID"
+    },
+    {
+      "anomaly_id": "EXC-ANOMALY-002",
+      "anomaly_type": "CAPA_CLOSED_BEFORE_VERIFICATION",
+      "expected_detection": true,
+      "entity": "CorrectiveAction",
+      "description": "CAPA closed with PENDING verification status"
+    },
+    {
+      "anomaly_id": "EXC-ANOMALY-003",
+      "anomaly_type": "DEFECT_COUNT_EXCEEDS_INSPECTED",
+      "expected_detection": true,
+      "entity": "Defect",
+      "description": "Defect quantity exceeds inspection failed quantity"
+    },
+    {
+      "anomaly_id": "EXC-ANOMALY-004",
+      "anomaly_type": "BOM_MATERIAL_NOT_CONSUMED",
+      "expected_detection": true,
+      "entity": "ProductionOrder",
+      "description": "Completed production order with no material consumption records"
+    },
+    {
+      "anomaly_id": "EXC-ANOMALY-005",
+      "anomaly_type": "BROKEN_TRACEABILITY_CHAIN",
+      "expected_detection": true,
+      "entity": "Defect",
+      "description": "Defect with all traceability links removed"
+    }
+  ]
+}
