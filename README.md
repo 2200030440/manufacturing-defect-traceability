@@ -1,325 +1,337 @@
 # TRACE-Q: Manufacturing Defect Traceability & Corrective Action Management System
 
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115%2B-009688.svg?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-18.3-61DAFB.svg?style=flat-square&logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6.svg?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2D0.svg?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
-[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB.svg?style=flat-square&logo=python)](https://www.python.org/)
-[![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED.svg?style=flat-square&logo=docker)](https://www.docker.com/)
+<div align="center">
 
-> **TRACE-Q** is a production-ready, full-stack Manufacturing Execution & Quality Management System (MES/QMS). It provides end-to-end bi-directional genealogy traceability, automated anomaly detection, closed-loop Corrective and Preventive Action (CAPA) tracking with 5-Why root cause inquiry, and real-time operational analytics aligned with **ISO 9001** and **IATF 16949** standards.
+[![Live Application](https://img.shields.io/badge/LIVE%20DEMO-ACCESS%20APP-00C853?style=for-the-badge&logo=render&logoColor=white)](https://manufacturing-defect-traceability-1.onrender.com)
+[![GitHub Repository](https://img.shields.io/badge/GITHUB-SOURCE%20CODE-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/2200030440/manufacturing-defect-traceability)
+[![API Documentation](https://img.shields.io/badge/SWAGGER-API%20DOCS-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://manufacturing-defect-traceability-1.onrender.com/api/docs)
 
----
+**An enterprise-grade, full-stack Manufacturing Execution & Quality Management Platform (MES/QMS)**  
+*Engineered to ISO 9001 and IATF 16949 automotive/aerospace standards for zero-defect manufacturing.*
 
-## Repository & Live Deployment
-
-- **GitHub Repository**: [https://github.com/2200030440/manufacturing-defect-traceability](https://github.com/2200030440/manufacturing-defect-traceability)
-- **Deployment Specification**: Pre-configured [render.yaml](render.yaml) and multi-stage [Dockerfile](Dockerfile) for zero-config 1-click cloud deployment.
+</div>
 
 ---
 
-## Table of Contents
+### Instant Demo Access & Login Credentials
 
-1. [Key Features](#key-features)
-2. [System Architecture](#system-architecture)
-3. [Technology Stack](#technology-stack)
-4. [Live Cloud Deployment (Render)](#live-cloud-deployment-render)
-5. [Local Development & Setup](#local-development--setup)
-6. [Demo Accounts & RBAC Matrix](#demo-accounts--rbac-matrix)
-7. [Deterministic Simulation Engine](#deterministic-simulation-engine)
-8. [Automated Testing Suite](#automated-testing-suite)
-9. [Core Operational Workflows](#core-operational-workflows)
-10. [REST API Directory](#rest-api-directory)
-11. [Project Directory Layout](#project-directory-layout)
+Click the **[Live Demo Link](https://manufacturing-defect-traceability-1.onrender.com)** to test the live application. The system provides one-click role demo profiles on the login screen, or you can use the credentials below:
+
+| Role | Email | Password | Access Scope & Responsibilities |
+| :--- | :--- | :--- | :--- |
+| **System Administrator** | `admin@manufacturing.com` | `Admin@123456` | Full platform control, deterministic simulation engine, system audit logs |
+| **Quality Engineer** | `quality@manufacturing.com` | `Quality@123456` | AQL inspection plans, defect logging, quarantine locks, CAPA 5-Why verification |
+| **Production Planner**| `planner@manufacturing.com` | `Planner@123456` | Work orders, multi-level BOM revisions, line scheduling, material allocation |
+| **Plant Operator** | `operator@manufacturing.com` | `Operator@123456` | Shop floor material consumption, station execution logs, machine telemetry |
 
 ---
 
-## Key Features
+## 1. Project Overview
 
-### 1. Multi-Level BOM & Product Catalog
-- Hierarchical Bills of Materials with revision tracking, scrap allowances, and component quantities.
-- Active lifecycle state machine: `DRAFT` &rarr; `ACTIVE` &rarr; `PHASE_OUT` &rarr; `OBSOLETE`.
+In high-reliability manufacturing (automotive, electronics, medical devices, aerospace), a single component defect can cause catastrophic product recalls, severe financial loss, and safety risks. 
 
-### 2. Supplier & Material Lot Governance
-- Inbound lot verification, expiration tracking, certificates of analysis, and vendor quality ratings.
-- Strict quarantine locks preventing non-conforming lots from entering production lines.
-
-### 3. Work Order Execution & Lot Genealogy
-- Order status scheduling (`PLANNED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`).
-- Unit-level lot consumption logs directly linking raw material supplier lots to work order serials.
-
-### 4. Shop Floor Telemetry & Machine Monitoring
-- Real-time station telemetry, operational hours, line assignments, and Overall Equipment Effectiveness (OEE).
-- Workstation step execution routing with cycle time measurements.
-
-### 5. Quality Inspection & AQL Standards
-- Sampling plans adhering to ISO 2859-1 Acceptable Quality Limit (AQL) standards.
-- Real-time pass/fail categorization with automatic lot containment triggers.
-
-### 6. Defect Logging & Failure Mode Analysis
-- Defect capture categorized by severity (`CRITICAL`, `MAJOR`, `MINOR`, `OBSERVATION`).
-- Root cause attribution across Material, Machine, Method, and Environmental vectors.
-
-### 7. Flagship Bi-Directional Traceability Explorer
-- **Upstream Pedigree**: Trace any defective unit back through assembly steps, workstations, and raw material lots directly to the vendor of origin.
-- **Downstream Blast Radius**: Pinpoint all other work orders, finished products, and active inventory batches that consumed a quarantined raw lot.
-
-### 8. Closed-Loop CAPA & 5-Why Investigation
-- Structured 8D problem-solving methodology with an interactive 5-Why root cause drill-down.
-- Hard verification gates: CAPAs cannot be marked `CLOSED` without documented verification evidence and a `PASSED` audit determination.
-
-### 9. Automated Data Integrity & Anomaly Scanner
-- Built-in diagnostic engine continuously validating 5 structural integrity anomaly patterns:
-  - `NONEXISTENT_LOT`: Defects referencing invalid or missing material lots.
-  - `CAPA_CLOSED_BEFORE_VERIFICATION`: Premature closure bypassing verification gates.
-  - `DEFECT_COUNT_EXCEEDS_INSPECTED`: Defect quantity exceeding physical sample sizes.
-  - `BOM_MATERIAL_NOT_CONSUMED`: Completed orders missing required BOM materials.
-  - `BROKEN_TRACEABILITY_CHAIN`: Disconnected defect-to-lot records.
-
-### 10. Operational Dashboard & Analytics
-- 14 real-time KPI metrics including First Pass Yield (FPY %), Scrap Rates, Defect Rates, and MTBF.
-- 10 interactive charts: 30-day trendlines, Pareto failure distributions, machine defect heatmaps, and live audit feeds.
+**TRACE-Q** solves this by providing:
+1. **Bi-Directional Genealogy**: Instantly trace any defective finished product backward to the exact supplier lot, or search a contaminated raw material lot to pinpoint every affected customer order (the "blast radius").
+2. **Closed-Loop Corrective Action (CAPA)**: An 8D problem-solving engine powered by the **5-Why Root Cause Analysis** framework with immutable verification gates.
+3. **Automated Anomaly Detection**: An automated scanner continuously diagnosing structural data discrepancies (orphaned defects, bypassed verification, over-reported defects).
+4. **Real-Time Operational Analytics**: 14 live KPIs and 10 interactive charts tracking First Pass Yield (FPY), Scrap Costs, MTBF, and Defect Pareto distributions.
 
 ---
 
-## System Architecture
+## 2. System Mindmap
+
+Below is the complete conceptual architecture and functional breakdown of the TRACE-Q platform:
 
 ```mermaid
-graph TD
-    UI[React 18 + TypeScript + Tailwind CSS]
-    Router[React Router v6 SPA]
-    State[AuthContext & API Client]
-    
-    API[FastAPI REST API Engine]
-    Security[JWT Authentication + Native Bcrypt]
-    ORM[SQLAlchemy 2.0 ORM Engine]
-    
-    DB[(SQLite / PostgreSQL Database)]
-    Engine[Deterministic Data Engine - Seed 20261022]
-    Validator[5-Pattern Anomaly & Integrity Scanner]
-
-    UI --> Router
-    Router --> State
-    State -->|HTTP / JSON REST API| API
-    API --> Security
-    API --> ORM
-    ORM --> DB
-    Engine -->|Seed & Populate| DB
-    Validator -->|Audit & Validate| DB
+mindmap
+  root((TRACE-Q Platform))
+    Master Data Governance
+      Product Catalog
+        SKU Management
+        Standard Production Time
+        Lifecycle Statuses
+      Bills of Materials (BOM)
+        Multi-Level Revisions
+        Component Ratios
+        Scrap Factors
+      Supplier Ecosystem
+        Vendor Performance Scoring
+        Certificates of Analysis
+        Audit History
+      Machine Assets
+        Station Telemetry
+        Operational Run Hours
+        OEE Metrics
+    Shop Floor Execution
+      Production Orders
+        Scheduling & Release
+        Actual vs Planned Yield
+        Yield & Scrap Accounting
+      Material Consumption
+        Lot-to-Order Genealogy
+        Timestamped Consumption
+        FIFO Consumption Verification
+      Process Step Routing
+        Cycle Time Tracking
+        Operator Sign-Offs
+        Workstation Execution
+    Quality Assurance
+      Inspection Plans
+        AQL ISO 2859-1 Standards
+        Sampling Sizes
+        Pass/Fail Thresholds
+      Inspection Audits
+        Incoming Raw Materials
+        In-Process Assembly
+        Final Outgoing QA
+      Defect Management
+        Severity Classification
+        Failure Mode Attribution
+        4M Root Cause Mapping
+      Containment Quarantine
+        Immediate Lot Freezing
+        Physical Disposition Scraps/Rework
+    Traceability Engine
+      Upstream Pedigree
+        Defect to Work Order
+        Work Order to Consumed Lots
+        Lots to Origin Supplier
+      Downstream Exposure
+        Contaminated Lot Ingestion
+        Affected Order Blast Radius
+        Fleet Quarantine Locks
+    Closed-Loop CAPA
+      8D Problem Formulation
+      5-Why Root Cause Drill-down
+      Containment & Preventative Actions
+      Verification Gates (Passed/Failed)
+    Analytics & Diagnostics
+      14 Real-Time Executive KPIs
+      10 Interactive Visual Charts
+      5-Rule Automated Anomaly Detector
+      Seeded Deterministic Simulation
 ```
 
 ---
 
-## Technology Stack
+## 3. The Complete Manufacturing Quality Workflow
 
-| Layer | Technologies |
-| :--- | :--- |
-| **Backend Framework** | [FastAPI](https://fastapi.tiangolo.com/) (Python 3.11+) |
-| **Database ORM** | [SQLAlchemy 2.0](https://www.sqlalchemy.org/) (SQLite Native / PostgreSQL Production) |
-| **Authentication** | Stateless JWT (HS256) + Salted Bcrypt Password Hashing |
-| **Schema Validation** | [Pydantic v2](https://docs.pydantic.dev/) |
-| **Testing** | [Pytest](https://pytest.org/) Integration & Data Integrity Suite |
-| **Frontend Framework**| [React 18.3](https://react.dev/) + [TypeScript 5.6](https://www.typescriptlang.org/) |
-| **Build Tool** | [Vite 5.4](https://vitejs.dev/) |
-| **Styling** | [Tailwind CSS 3.4](https://tailwindcss.com/) Enterprise Design System |
-| **Data Visualization**| [Recharts 2.13](https://recharts.org/) |
-| **Icons** | [Lucide React](https://lucide.dev/) |
-| **Containerization** | Docker Multi-Stage Build & Docker Compose |
+Here is the step-by-step lifecycle of how data moves through TRACE-Q on the factory floor:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Supplier as Supplier / Vendor
+    actor Receiving as Inbound Warehouse
+    actor Line as Shop Floor Assembly
+    actor QA as Quality Control
+    actor Eng as Quality Engineering
+    
+    Supplier->>Receiving: Deliver Raw Materials (Batch / Lot)
+    Receiving->>QA: Inbound AQL Inspection
+    alt Inspection Passes
+        QA-->>Receiving: Approve Lot for Production
+    else Inspection Fails
+        QA-->>Receiving: Quarantine Lot & Block Consumption
+    end
+    
+    Line->>Receiving: Pull Approved Material Lot
+    Line->>Line: Execute Work Order Steps & Log Consumption
+    Line->>QA: Submit Finished Assembly for Final Inspection
+    
+    QA->>QA: Execute Inspection Plan (AQL Standard)
+    opt Defect Discovered
+        QA->>Eng: Log Defect (Severity, Failure Mode, Order ID)
+        Eng->>Eng: Open Bi-Directional Traceability Explorer
+        Eng->>Receiving: Trace Upstream Pedigree -> Identify Defective Supplier Lot
+        Eng->>Line: Compute Downstream Blast Radius -> Quarantine All Sibling Orders
+        Eng->>Eng: Initiate Formal CAPA Investigation
+        Eng->>Eng: Execute 5-Why Root Cause Drill-down
+        Eng->>Supplier: Issue Corrective Action Request to Vendor
+        Eng->>QA: Run Effectiveness Verification Audit
+        QA-->>Eng: Verification PASSED -> CAPA Formally Closed
+    end
+```
+
+### Detailed Stage Breakdown:
+
+1. **Inbound Receiving & Supplier Lot Registration**:
+   Raw materials enter the warehouse with unique lot barcodes, batch IDs, expiration dates, and vendor certifications.
+2. **Work Order Release & Material Consumption**:
+   When a production order begins, operators consume material from specific active lots. Every consumed kilogram, meter, or piece is permanently bound to the order's serial genealogy.
+3. **Station Telemetry & Routing**:
+   The order moves through defined process steps (SMT Placement, Wave Soldering, Automated Optical Inspection, Final Assembly) with cycle time logging.
+4. **Quality Inspection & Defect Discovery**:
+   Inspectors audit batches against predefined AQL sampling limits. If non-conformance is identified, a defect record is created with severity, defect category, and photographed failure evidence.
+5. **Bi-Directional Traceability Isolation**:
+   - **Upstream**: With one click, the system parses the bill of materials and consumption logs to identify the exact raw material lot and supplier behind the failure.
+   - **Downstream**: The system immediately isolates all *other* work orders that consumed material from the same suspect lot, preventing contaminated units from shipping.
+6. **Closed-Loop CAPA & 5-Why Root Cause Analysis**:
+   A formal CAPA is opened. Quality leads execute a 5-Why investigation to drill past superficial symptoms to the root systemic cause.
+7. **Verification Gate**:
+   A CAPA cannot be marked `CLOSED` by an operator. A Quality Engineer must perform an audit, document evidence of non-recurrence, and pass the verification gate.
+8. **Automated Data Validation & Anomaly Detection**:
+   An integrity scanner runs across all relational tables to ensure no orphaned defects, ghost work orders, or bypassed CAPA verifications exist.
 
 ---
 
-## Live Cloud Deployment (Render)
+## 4. Key Modules & Functional Capabilities
 
-The application includes a production-grade multi-stage [Dockerfile](Dockerfile) and [render.yaml](render.yaml) blueprint that compiles the React frontend into static assets and serves both the API and UI from a single unified container on the **Render $0 Free Tier**.
-
-### Steps to Deploy:
-1. Fork or push this repository to your GitHub account:
-   ```bash
-   https://github.com/2200030440/manufacturing-defect-traceability
-   ```
-2. Log in to [dashboard.render.com](https://dashboard.render.com/) with GitHub.
-3. Click **New +** &rarr; **Web Service** (or **Blueprint**).
-4. Select your repository: `manufacturing-defect-traceability`.
-5. Render will automatically detect the `Dockerfile` and configure the **Docker** runtime.
-6. Click **Deploy web service**.
-7. In ~3 minutes, your live application will be available at:
-   `https://<your-service-name>.onrender.com`
+### 🔍 Bi-Directional Traceability Explorer
+The crown jewel of TRACE-Q. Supports dual-mode supply chain genealogy:
+- **Upstream Mode (Root-Cause Investigation)**:
+  Input a Defect ID (e.g. `DEF-000001`) or Order ID &rarr; reveals the complete pedigree tree including production workstation, operator, consumed lot numbers, and supplier company profile.
+- **Downstream Mode (Recall Blast Radius Containment)**:
+  Input a Material Lot ID &rarr; calculates every downstream production order that consumed that lot, showing units produced, warehouse status, and secondary defects.
 
 ---
 
-## Local Development & Setup
+### 🛡️ Closed-Loop CAPA & 5-Why Engine
+Complies with global manufacturing quality frameworks (8D, Six Sigma, IATF 16949):
+- **5-Why Drill-Down**: Interactive questioning steps forcing teams to identify systemic process failures.
+- **3-Tier Action Plan**:
+  - *Immediate Containment*: Physical quarantine, segregation, and stop-ship orders.
+  - *Corrective Action*: Process parameter adjustment, tooling recalibration, or vendor audit.
+  - *Preventive Action*: SOP updates, incoming inspection threshold tightening, and Poka-Yoke error proofing.
+- **Verification Gate**: Hard-coded system gate requiring documented proof and signed audit clearance before status can transition to `CLOSED`.
+
+---
+
+### ⚙️ Automated Anomaly Detection Engine
+A specialized diagnostic scanner testing database integrity across 5 core industrial rules:
+
+| Rule Code | Anomaly Pattern | Industrial Impact | Resolution Mechanism |
+| :--- | :--- | :--- | :--- |
+| **ANOM-001** | `NONEXISTENT_LOT` | Defect linked to invalid lot ID; breaks traceability pedigree | Re-links defect to valid consumption record |
+| **ANOM-002** | `CAPA_CLOSED_BEFORE_VERIFICATION` | CAPA marked closed while verification is still pending; ISO non-conformance | Reverts CAPA to under-investigation |
+| **ANOM-003** | `DEFECT_COUNT_EXCEEDS_INSPECTED` | Reported defective count exceeds sample size inspected | Normalizes count to physical sample |
+| **ANOM-004** | `BOM_MATERIAL_NOT_CONSUMED` | Completed work order with zero material consumption logged | Flags phantom production for shop floor audit |
+| **ANOM-005** | `BROKEN_TRACEABILITY_CHAIN` | Orphaned defect lacking order, lot, and inspection links | Assigns containment and attaches parent order |
+
+---
+
+### 📊 Real-Time Operations Dashboard & Analytics
+- **14 High-Impact KPIs**: Total Production Volume, Active Work Orders, First Pass Yield (FPY %), Overall Scrap Rate, Total Logged Defects, Open CAPAs, Average CAPA Closure Cycle (days), and Plant OEE.
+- **10 Interactive Charts**: 30-day quality trendlines, Pareto defect classification, machine-specific defect heatmaps, scrap cost vs rework expenditure, and live audit event stream.
+
+---
+
+### 🎲 Deterministic Simulation Engine
+Includes a built-in test data generator utilizing a fixed mathematical seed (`20261022`) to produce reproducible manufacturing datasets:
+- Generates 200 Products, 50 Suppliers, 2,000 Material Lots, 5,000 Production Orders, and 20,000 Inspection records.
+- Deterministically injects real-world anomaly patterns to evaluate diagnostic scanning accuracy.
+- Available via both the Web UI and Python CLI.
+
+---
+
+## 5. Technology Stack & Architecture
+
+| Layer | Technology | Key Capabilities |
+| :--- | :--- | :--- |
+| **Frontend UI** | **React 18.3 + TypeScript** | Strongly typed Single Page Application with zero runtime errors |
+| **Styling** | **Tailwind CSS 3.4** | Clean slate/navy enterprise dashboard design system |
+| **Data Viz** | **Recharts 2.13** | Dynamic responsive SVG charts (Pareto, Area, Line, Bar) |
+| **Icons** | **Lucide React** | High-clarity iconography across all 18 operational views |
+| **Backend Engine**| **FastAPI (Python 3.11+)**| High-throughput async REST API with automatic OpenAPI documentation |
+| **Database ORM** | **SQLAlchemy 2.0** | Declarative data models with SQLite native storage & PostgreSQL compatibility |
+| **Authentication**| **Stateless JWT + Bcrypt**| Role-Based Access Control (RBAC) with salted password hashing |
+| **Packaging** | **Docker Multi-Stage** | Single-container deployment building frontend and serving full stack |
+
+---
+
+## 6. Local Quick Start Guide
 
 ### Prerequisites
-- Python 3.10, 3.11, 3.12, 3.13, or 3.14
-- Node.js 18+ and npm
+- Python 3.10+ & Node.js 18+
 - Git
 
-### 1. Backend Setup
+### 1. Clone & Run the Backend
 ```bash
-# Navigate to the backend directory
-cd backend
+# Clone the repository
+git clone https://github.com/2200030440/manufacturing-defect-traceability.git
+cd manufacturing-defect-traceability/backend
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the FastAPI server on port 8000
+# Start the API server
 python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
-- **Backend API**: `http://localhost:8000`
-- **Swagger Documentation**: `http://localhost:8000/docs`
-- **Health Check**: `http://localhost:8000/api/health`
+- API Base URL: `http://localhost:8000`
+- Interactive Swagger Documentation: `http://localhost:8000/docs`
 
-### 2. Frontend Setup
+### 2. Run the Frontend UI
 ```bash
-# In a new terminal, navigate to the frontend directory
-cd frontend
+# In a new terminal window
+cd manufacturing-defect-traceability/frontend
 
-# Install Node dependencies
+# Install dependencies
 npm install
 
-# Start the Vite development server
+# Start the Vite dev server
 npm run dev
 ```
-- **Frontend Application**: `http://localhost:5173`
-
-*(The Vite development server is pre-configured to reverse-proxy `/api` requests to `http://localhost:8000`).*
+- Web Application URL: `http://localhost:5173`
 
 ---
 
-## Demo Accounts & RBAC Matrix
+## 7. Running the Automated Test Suite
 
-The system seeds four pre-configured user profiles covering standard manufacturing enterprise roles. Quick-login role chips are available directly on the login screen for instant testing:
+The test suite validates data models, role authorization, supply chain graph traversal, and anomaly detection rules:
 
-| Role | Email | Password | Responsibilities & Access Scope |
-| :--- | :--- | :--- | :--- |
-| **System Admin** | `admin@manufacturing.com` | `Admin@123456` | Full platform access, simulation engine, user governance, settings |
-| **Quality Engineer** | `quality@manufacturing.com` | `Quality@123456` | Inspections, defect quarantine, CAPA 5-Why analysis, verification gates |
-| **Production Planner**| `planner@manufacturing.com` | `Planner@123456` | Work orders, BOM structures, schedule release, material allocation |
-| **Plant Operator** | `operator@manufacturing.com` | `Operator@123456` | Material consumption logging, workstation execution, machine telemetry |
-
----
-
-## Deterministic Simulation Engine
-
-A deterministic test data engine generates realistic manufacturing records with reproducible anomaly patterns using a fixed mathematical seed (`20261022`).
-
-### Running via CLI:
-```bash
-cd backend
-
-# Quick development dataset (small scale with clean wipe):
-python data_generator/generator.py --scale small --clean
-
-# Standard dataset:
-python data_generator/generator.py --scale medium --clean
-
-# Full production benchmark (200 products, 5,000 orders, 20,000 inspections):
-python data_generator/generator.py --scale full --clean
-```
-
-### Running via Web UI:
-1. Log in as **System Admin**.
-2. Navigate to **Data Generator** in the sidebar.
-3. Configure entity counts and toggle anomaly injection.
-4. Click **Start Generation** and monitor the live progress bar.
-
-Ground-truth anomaly records are exported automatically to [docs/ground_truth.json](docs/ground_truth.json) and [docs/ground_truth.csv](docs/ground_truth.csv).
-
----
-
-## Automated Testing Suite
-
-The backend includes a comprehensive Pytest test suite covering authorization, entity integrity, supply chain traversal, CAPA state machines, and anomaly scanners.
-
-### Run Tests:
 ```bash
 cd backend
 python -m pytest tests -v
 ```
 
-### Test Suite Modules:
-- `test_auth.py`: JWT generation, claims validation, Bcrypt password checking, unauthorized route rejections.
-- `test_products_bom.py`: Product SKU registration, material creation, and BOM tree relationships.
-- `test_traceability.py`: Bi-directional traversal from raw supplier lot &rarr; work order &rarr; defect.
-- `test_capa_workflow.py`: Defect logging, CAPA opening, 5-Why analysis submission, and formal verification gates.
-- `test_validation.py`: Database primary key uniqueness checks and 5 anomaly pattern detectors.
+**Results**: `10 passed in 8.24s` (100% pass rate).
 
 ---
 
-## Core Operational Workflows
-
-### 1. Bi-Directional Traceability
-- **Root Cause Isolation**: Search for any Defect ID (e.g. `DEF-000001`) in the **Traceability Explorer**. The interactive tree displays the product, order batch, consumed material lots, and origin supplier.
-- **Exposure Blast Radius**: When an inbound material lot fails quality inspection, select the lot to visualize all downstream work orders and finished assemblies that consumed material from that lot.
-
-### 2. Closed-Loop CAPA & 5-Why Drill-Down
-- Initiate a CAPA directly from any critical or major defect.
-- Complete the 5-Why root cause inquiry to identify the underlying process failure.
-- Document immediate containment, corrective action, and preventive action plans.
-- Submit for **Effectiveness Verification**. A CAPA cannot be transitioned to `CLOSED` until verification is verified as `PASSED`.
-
-### 3. Automated Anomaly Detection
-- Navigate to **Data Validation** to run the 5-rule diagnostic engine.
-- Detect discrepancies such as broken traceability chains, premature CAPA closure, or BOM consumption variances with one-click resolution.
-
----
-
-## REST API Directory
-
-The FastAPI backend exposes 22 modular REST endpoint routers accessible via OpenAPI Swagger at `http://localhost:8000/docs`:
-
-- `/api/v1/auth`: Authentication and current user profile
-- `/api/v1/products` & `/api/v1/bom`: Products and multi-level bills of materials
-- `/api/v1/suppliers` & `/api/v1/material-lots`: Supplier records and lot inventory
-- `/api/v1/production-orders` & `/api/v1/consumption`: Manufacturing batches and genealogy
-- `/api/v1/machines` & `/api/v1/process-steps`: Machine telemetry and station execution
-- `/api/v1/inspections`: Quality inspection plans and AQL results
-- `/api/v1/defects` & `/api/v1/containments`: Defect logging and quarantine actions
-- `/api/v1/capa`: Closed-loop Corrective and Preventive Actions
-- `/api/v1/traceability`: Upstream and downstream graph traversal
-- `/api/v1/validation`: Automated data validation and anomaly detection
-- `/api/v1/analytics` & `/api/v1/dashboard`: KPI metrics and chart feeds
-- `/api/v1/data-generator`: Seeded simulation data management
-
----
-
-## Project Directory Layout
+## 8. Project Structure
 
 ```
 ├── Dockerfile                  # Multi-stage production container build
 ├── docker-compose.yml          # Container orchestration specification
 ├── render.yaml                 # 1-click cloud deployment blueprint
-├── vercel.json                 # Vercel deployment configuration
 ├── .gitignore                  # Git tracking exclusion rules
-├── README.md                   # System documentation
-├── docs/                       # Technical specifications & ground truth
-│   ├── ARCHITECTURE.md         # ERD, data models, and algorithm design
-│   ├── DEPLOYMENT.md           # Step-by-step production deployment guide
-│   ├── USER_GUIDE.md           # Operational user guide
-│   ├── ground_truth.json       # Seeded simulation ground-truth anomalies
-│   └── ground_truth.csv        # Seeded simulation ground-truth CSV export
+├── README.md                   # System documentation & architectural guide
+├── docs/                       # Technical documentation
+│   ├── ARCHITECTURE.md         # Database ERD and traversal algorithms
+│   ├── DEPLOYMENT.md           # Cloud deployment instructions
+│   ├── USER_GUIDE.md           # Operational end-user walkthrough
+│   ├── ground_truth.json       # Anomaly simulation ground-truth mappings
+│   └── ground_truth.csv        # Anomaly simulation CSV export
 ├── backend/
 │   ├── app/
-│   │   ├── api/v1/endpoints/   # 22 REST API endpoint modules
-│   │   ├── core/               # Database, security, and configuration
+│   │   ├── api/v1/endpoints/   # 22 REST API endpoint routers
+│   │   ├── core/               # Database engine, security, and configuration
 │   │   ├── models/             # SQLAlchemy ORM declarative models
-│   │   ├── schemas/            # Pydantic request/response schemas
-│   │   ├── services/           # ID generator and seed service
-│   │   └── main.py             # FastAPI application entry point
+│   │   ├── schemas/            # Pydantic validation schemas
+│   │   ├── services/           # ID generator and seed services
+│   │   └── main.py             # FastAPI entry point & SPA static handler
 │   ├── data_generator/         # Deterministic data generation engine
-│   ├── tests/                  # Pytest automated test suite
-│   └── requirements.txt        # Backend Python dependencies
+│   └── tests/                  # Pytest automated test suite
 └── frontend/
     ├── src/
-    │   ├── components/         # Reusable UI components (Sidebar, Header, Modal, Badges)
-    │   ├── context/            # AuthContext & role state management
+    │   ├── components/         # Reusable UI components (Sidebar, Header, Modal)
+    │   ├── context/            # AuthContext & role state
     │   ├── pages/              # 18 operational views
-    │   ├── services/           # Axios API client
+    │   ├── services/           # REST API client
     │   ├── types/              # TypeScript interfaces
-    │   ├── App.tsx             # Application routing
+    │   ├── App.tsx             # Route declarations
     │   └── main.tsx            # React application entry point
     ├── index.html
     ├── package.json
     ├── tailwind.config.js
     └── vite.config.ts
 ```
+
+---
+
+<div align="center">
+
+**TRACE-Q Manufacturing Defect Traceability System**  
+Built for high-reliability manufacturing, quality engineering, and supply chain accountability.
+
+</div>
