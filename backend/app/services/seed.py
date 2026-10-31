@@ -80,7 +80,27 @@ def seed_initial_data():
                 logger.info(f"Created user: {user_data['email']}")
 
         db.commit()
-        logger.info("Seed data completed successfully")
+        logger.info("User and role seed completed successfully")
+
+        # Auto-seed operational manufacturing dataset on first boot
+        from app.models.product import Product
+        if db.query(Product).count() == 0:
+            logger.info("Fresh database detected; automatically seeding initial manufacturing dataset...")
+            from data_generator.generator import DataGenerator
+            gen = DataGenerator(db_url=settings.DATABASE_URL, seed=20261022)
+            gen.generate({
+                "seed": 20261022,
+                "n_products": 20,
+                "n_suppliers": 10,
+                "n_lots": 100,
+                "n_orders": 150,
+                "n_inspections": 300,
+                "include_anomalies": True,
+                "clean_first": False,
+            })
+            logger.info("Operational manufacturing dataset seeded successfully!")
+
+        logger.info("Initial data startup complete")
     except Exception as e:
         db.rollback()
         logger.error(f"Seed data error: {e}")
