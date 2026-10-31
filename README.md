@@ -188,52 +188,89 @@ sequenceDiagram
 
 ---
 
-## 4. Key Modules & Functional Capabilities
+## 4. Visual Walkthrough & Page-by-Page Guide
 
-### 🔍 Bi-Directional Traceability Explorer
-The crown jewel of TRACE-Q. Supports dual-mode supply chain genealogy:
-- **Upstream Mode (Root-Cause Investigation)**:
-  Input a Defect ID (e.g. `DEF-000001`) or Order ID &rarr; reveals the complete pedigree tree including production workstation, operator, consumed lot numbers, and supplier company profile.
-- **Downstream Mode (Recall Blast Radius Containment)**:
-  Input a Material Lot ID &rarr; calculates every downstream production order that consumed that lot, showing units produced, warehouse status, and secondary defects.
+### 1. Role-Based Authentication & Instant Access
+<p align="center">
+  <img src="docs/screenshots/01_login_roles.png" alt="TRACE-Q Login Page with 1-Click Roles" width="850" />
+</p>
 
----
-
-### 🛡️ Closed-Loop CAPA & 5-Why Engine
-Complies with global manufacturing quality frameworks (8D, Six Sigma, IATF 16949):
-- **5-Why Drill-Down**: Interactive questioning steps forcing teams to identify systemic process failures.
-- **3-Tier Action Plan**:
-  - *Immediate Containment*: Physical quarantine, segregation, and stop-ship orders.
-  - *Corrective Action*: Process parameter adjustment, tooling recalibration, or vendor audit.
-  - *Preventive Action*: SOP updates, incoming inspection threshold tightening, and Poka-Yoke error proofing.
-- **Verification Gate**: Hard-coded system gate requiring documented proof and signed audit clearance before status can transition to `CLOSED`.
+- **What this page does**: Provides enterprise-grade authentication with JWT token exchange and salted Bcrypt password hashing.
+- **Key Capabilities**:
+  - **1-Click Quick Role Chips**: Evaluators can click `System Admin`, `Quality Engineer`, `Production Planner`, or `Plant Operator` to instantly auto-fill credentials and test role-tailored permissions.
+  - **Security**: Strict session timeout, automatic token refresh, and route guard protection.
 
 ---
 
-### ⚙️ Automated Anomaly Detection Engine
-A specialized diagnostic scanner testing database integrity across 5 core industrial rules:
+### 2. Plant Quality & Operations Dashboard
+<p align="center">
+  <img src="docs/screenshots/02_dashboard_kpis.png" alt="TRACE-Q Executive Dashboard" width="850" />
+</p>
 
-| Rule Code | Anomaly Pattern | Industrial Impact | Resolution Mechanism |
-| :--- | :--- | :--- | :--- |
-| **ANOM-001** | `NONEXISTENT_LOT` | Defect linked to invalid lot ID; breaks traceability pedigree | Re-links defect to valid consumption record |
-| **ANOM-002** | `CAPA_CLOSED_BEFORE_VERIFICATION` | CAPA marked closed while verification is still pending; ISO non-conformance | Reverts CAPA to under-investigation |
-| **ANOM-003** | `DEFECT_COUNT_EXCEEDS_INSPECTED` | Reported defective count exceeds sample size inspected | Normalizes count to physical sample |
-| **ANOM-004** | `BOM_MATERIAL_NOT_CONSUMED` | Completed work order with zero material consumption logged | Flags phantom production for shop floor audit |
-| **ANOM-005** | `BROKEN_TRACEABILITY_CHAIN` | Orphaned defect lacking order, lot, and inspection links | Assigns containment and attaches parent order |
-
----
-
-### 📊 Real-Time Operations Dashboard & Analytics
-- **14 High-Impact KPIs**: Total Production Volume, Active Work Orders, First Pass Yield (FPY %), Overall Scrap Rate, Total Logged Defects, Open CAPAs, Average CAPA Closure Cycle (days), and Plant OEE.
-- **10 Interactive Charts**: 30-day quality trendlines, Pareto defect classification, machine-specific defect heatmaps, scrap cost vs rework expenditure, and live audit event stream.
+- **What this page does**: Serves as the mission-control center for the manufacturing plant, aggregating real-time metrics across all production lines and quality gates.
+- **Key Capabilities**:
+  - **14 Live KPI Cards**: Production Volume (30,000+ units), First Pass Yield (FPY %), Scrap & Rework Counts, Total Defects, Open CAPAs, and Traceability Chain Coverage %.
+  - **10 Interactive Visualizations**: 90-day defect discovery volume, Inspection Pass vs Fail yields, Pareto analysis of top failure modes, machine defect distributions, and supplier quality rankings.
+  - **Live Audit Feed**: Real-time event stream showing recent lot quarantines, order completions, and CAPA state changes.
 
 ---
 
-### 🎲 Deterministic Simulation Engine
-Includes a built-in test data generator utilizing a fixed mathematical seed (`20261022`) to produce reproducible manufacturing datasets:
-- Generates 200 Products, 50 Suppliers, 2,000 Material Lots, 5,000 Production Orders, and 20,000 Inspection records.
-- Deterministically injects real-world anomaly patterns to evaluate diagnostic scanning accuracy.
-- Available via both the Web UI and Python CLI.
+### 3. Bi-Directional Traceability Explorer (Flagship Feature)
+<p align="center">
+  <img src="docs/screenshots/03_traceability_explorer.png" alt="TRACE-Q Traceability Explorer" width="850" />
+</p>
+
+- **What this page does**: Delivers instant, bi-directional genealogy tracing to find the root cause of non-conformances in seconds rather than days.
+- **Key Capabilities**:
+  - **Upstream Pedigree (Root Cause Discovery)**: Search any Defect ID (e.g. `DEF-000001`) or Order ID to inspect the visual genealogy tree. Traces the defect back through assembly workstations and consumed raw material lots directly to the origin supplier.
+  - **Downstream Exposure (Recall Blast Radius)**: Select any suspect material lot to calculate all other work orders and finished assemblies that consumed that lot, pinpointing exactly which batches need to be held from customer shipment.
+  - **Quick Sample Buttons**: Pre-loaded with quick-query buttons (`DEF-000001`, `ORD-000001`, `LOT-000001`) for instantaneous evaluation.
+
+---
+
+### 4. Defect Management & Immediate Containment
+<p align="center">
+  <img src="docs/screenshots/04_defect_management.png" alt="TRACE-Q Defect Management" width="850" />
+</p>
+
+- **What this page does**: Centralizes shop-floor non-conformance reporting, failure mode categorization, and physical disposition controls.
+- **Key Capabilities**:
+  - **Severity Triage**: Filter defects by `CRITICAL`, `MAJOR`, `MINOR`, and `OBSERVATION`.
+  - **Physical Disposition**: Assign immediate containment actions (`SCRAP`, `REWORK`, `USE_AS_IS`, `RETURN_TO_VENDOR`) to prevent defective parts from advancing.
+  - **1-Click CAPA Initiation**: Directly trigger a formal Corrective Action investigation from any high-severity defect.
+
+---
+
+### 5. Closed-Loop CAPA & 5-Why Investigation Engine
+- **What this page does**: Guides engineering teams through the structured 8D problem-solving methodology to permanently eliminate recurring defects.
+- **Key Capabilities**:
+  - **Interactive 5-Why Drill-Down**: Prompts engineers through sequential root-cause inquiries to bypass surface symptoms and identify systemic process failures.
+  - **Action Plan Milestones**: Assigns immediate containment, corrective action, and preventive engineering controls with clear ownership and target completion dates.
+  - **Formal Verification Closure Gate**: Enforces ISO 9001 compliance by preventing any CAPA from being marked `CLOSED` until formal verification is documented and marked `PASSED`.
+
+---
+
+### 6. Automated Anomaly Detection & Integrity Scanner
+- **What this page does**: Continuously executes diagnostic checks across the database to detect and resolve manufacturing data discrepancies.
+- **Key Rules Verified**:
+  - `NONEXISTENT_LOT`: Identifies defects referencing missing or corrupt material lot records.
+  - `CAPA_CLOSED_BEFORE_VERIFICATION`: Flags CAPAs prematurely marked closed without signed verification.
+  - `DEFECT_COUNT_EXCEEDS_INSPECTED`: Catches reporting anomalies where defect counts exceed sample sizes.
+  - `BOM_MATERIAL_NOT_CONSUMED`: Flags phantom work orders completed without required raw materials.
+  - `BROKEN_TRACEABILITY_CHAIN`: Detects orphaned records lacking parent supply chain links.
+
+---
+
+### 7. Deterministic Simulation & Test Data Engine
+<p align="center">
+  <img src="docs/screenshots/05_data_generator.png" alt="TRACE-Q Data Generator" width="850" />
+</p>
+
+- **What this page does**: Provides deterministic test data generation powered by fixed mathematical seed `20261022` for repeatable demonstration and benchmarking.
+- **Key Capabilities**:
+  - **Multi-Scale Presets**: Small (quick testing), Medium, or Full Production (200 products, 5,000 orders, 20,000 inspections).
+  - **Reproducible Anomalies**: Injects controlled edge cases to validate diagnostic scanning accuracy.
+  - **Ground Truth Exports**: Automatically generates audited reference datasets in `docs/ground_truth.json` and `docs/ground_truth.csv`.
 
 ---
 
