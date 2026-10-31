@@ -60,12 +60,19 @@ if frontend_dist:
     if os.path.exists(assets_dir):
         app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
 
-    @app.get("/{full_path:path}", include_in_schema=False)
-    async def serve_spa(full_path: str):
-        if full_path.startswith("api"):
-            from fastapi import HTTPException
-            raise HTTPException(status_code=404, detail="Not Found")
-        file_path = os.path.join(frontend_dist, full_path)
-        if full_path and os.path.exists(file_path) and os.path.isfile(file_path):
-            return FileResponse(file_path)
+    @app.get("/", include_in_schema=False)
+    async def serve_root():
         return FileResponse(os.path.join(frontend_dist, "index.html"))
+
+    from starlette.exceptions import HTTPException as StarletteHTTPException
+    from fastapi.responses import JSONResponse
+
+    @app.exception_handler(StarletteHTTPException)
+    async def spa_404_handler(request, exc):
+        if exc.status_code == 404 and not request.url.path.startswith("/api"):
+            relative_path = request.url.path.lstrip("/")
+            file_path = os.path.join(frontend_dist, relative_path)
+            if relative_path and os.path.exists(file_path) and os.path.isfile(file_path):
+                return FileResponse(file_path)
+            return FileResponse(os.path.join(frontend_dist, "index.html"))
+        return JSONResponse(status_code=exc.status_code, content={"detail": exc.detail})
