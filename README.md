@@ -2,9 +2,14 @@
 
 <div align="center">
 
-[![Live Application](https://img.shields.io/badge/LIVE%20DEMO-ACCESS%20APP-00C853?style=for-the-badge&logo=render&logoColor=white)](https://manufacturing-defect-traceability-1.onrender.com)
-[![GitHub Repository](https://img.shields.io/badge/GITHUB-SOURCE%20CODE-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/2200030440/manufacturing-defect-traceability)
-[![API Documentation](https://img.shields.io/badge/SWAGGER-API%20DOCS-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://manufacturing-defect-traceability-1.onrender.com/api/docs)
+# 🚀 [CLICK HERE TO LAUNCH LIVE WEB APPLICATION](https://manufacturing-defect-traceability-1-8k76.onrender.com)
+### 🌐 **[https://manufacturing-defect-traceability-1-8k76.onrender.com](https://manufacturing-defect-traceability-1-8k76.onrender.com)**
+
+<br/>
+
+[![Live Application](https://img.shields.io/badge/🟢%20LIVE%20WEB%20APP-OPEN%20TRACE--Q-00C853?style=for-the-badge&logo=render&logoColor=white)](https://manufacturing-defect-traceability-1-8k76.onrender.com)
+[![Swagger API Docs](https://img.shields.io/badge/📖%20API%20DOCS-EXPLORE%20SWAGGER%20UI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://manufacturing-defect-traceability-1-8k76.onrender.com/api/docs)
+[![GitHub Repository](https://img.shields.io/badge/💻%20GITHUB-SOURCE%20CODE-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/2200030440/manufacturing-defect-traceability)
 
 **An enterprise-grade, full-stack Manufacturing Execution & Quality Management Platform (MES/QMS)**  
 *Engineered to ISO 9001 and IATF 16949 automotive/aerospace standards for zero-defect manufacturing.*
@@ -13,9 +18,17 @@
 
 ---
 
+> [!IMPORTANT]
+> ### 🔗 Official Live Deployment Link:
+> ## 👉 **[https://manufacturing-defect-traceability-1-8k76.onrender.com](https://manufacturing-defect-traceability-1-8k76.onrender.com)** 👈
+> **The full-stack application (React 18 Frontend, FastAPI REST Backend, and SQLite/PostgreSQL Database) is fully deployed, active, and accessible via the link above.**  
+> *Click the link above to test the interactive dashboard, traceability explorer, CAPA management, and anomaly detection live in your browser.*
+
+---
+
 ### Instant Demo Access & Login Credentials
 
-Click the **[Live Demo Link](https://manufacturing-defect-traceability-1.onrender.com)** to test the live application. The system provides one-click role demo profiles on the login screen, or you can use the credentials below:
+Click **[Open Live Application](https://manufacturing-defect-traceability-1-8k76.onrender.com)** to access the platform. On the login screen, you can use the **1-click quick login role chips** or sign in with any of the demo accounts below:
 
 | Role | Email | Password | Access Scope & Responsibilities |
 | :--- | :--- | :--- | :--- |
