@@ -38,4 +38,4 @@ COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 WORKDIR /app/backend
 EXPOSE 8000
 
-CMD ["sh", "-c", "python -c 'from app.core.database import init_db; init_db()' && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

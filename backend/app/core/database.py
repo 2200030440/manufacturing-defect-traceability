@@ -27,3 +27,10 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def init_db():
+    import app.models  # noqa
+    Base.metadata.create_all(bind=engine)
+    from app.services.seed import seed_initial_data
+    seed_initial_data()
